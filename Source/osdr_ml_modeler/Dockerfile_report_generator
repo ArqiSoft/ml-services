@@ -1,0 +1,13 @@
+# Base image
+FROM "docker.your-company.com/sds-tools:latest"
+
+LABEL maintainer="rick.zakharov@gmail.com"
+
+ENV INSTALL_PATH /usr/app
+RUN mkdir -p "$INSTALL_PATH" && chmod 777 "$INSTALL_PATH"
+WORKDIR $INSTALL_PATH
+
+# Add the app code
+COPY report_generator.py report_generator.py
+
+EXPOSE 5030

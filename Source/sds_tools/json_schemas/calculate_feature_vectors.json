@@ -1,0 +1,19 @@
+{
+    "title": "Feature vectors calculator command parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "CalculateFeatureVectors",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Commands",
+    "properties": {
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "Fingerprints": {
+            "type": "array"
+        },
+        "FileType": {
+            "type": "string"
+        }
+    }
+}

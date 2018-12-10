@@ -1,0 +1,39 @@
+{
+    "title": "Training optimized parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "TrainingOptimized",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Events",
+    "properties": {
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "SubSampleSize": {
+            "type": "decimal"
+        },
+         "TestDataSize": {
+            "type": "decimal"
+        },
+        "Scaler": {
+            "type": "string"
+        },
+        "KFold": {
+            "type": "integer"
+        },
+        "Fingerprints": {
+            "type": "array"
+        },
+        "Id": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "UserId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "HyperParameters": {
+            "type": "object"
+        }
+    }
+}

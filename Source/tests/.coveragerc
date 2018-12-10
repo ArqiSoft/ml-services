@@ -1,0 +1,25 @@
+[run]
+branch = True
+source = ../../Source
+omit =
+    */tests/*
+    */UBC_project/*
+    */callers and models/*
+    */docker/*
+    */happy_net/*
+    */__init__.py
+    */call_clust.py
+    */clustering.py
+    */consensus.py
+    */desc_finder.py
+    */sds_tools/predict.py
+    */bandstructure_featurizer.py
+    */tester.py
+    */tuner.py
+    */structure_featurizer.py
+
+[report]
+ignore_errors = True
+
+[html]
+directory = coverage_html_report

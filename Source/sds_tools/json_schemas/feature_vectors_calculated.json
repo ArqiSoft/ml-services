@@ -1,0 +1,22 @@
+{
+    "title": "Feature vectors calculated parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "FeatureVectorsCalculated",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Events",
+    "properties": {
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "Structures": {
+            "type": "integer"
+        },
+        "Columns": {
+            "type": "integer"
+        },
+        "Failed": {
+            "type": "integer"
+        }
+    }
+}

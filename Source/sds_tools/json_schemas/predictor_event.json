@@ -1,0 +1,37 @@
+{
+    "title": "Predictor event parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "PropertiesPredicted",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Events",
+    "properties": {
+        "Id": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "FileName": {
+            "type": "string"
+        },
+        "FileBlobId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "FileBucket": {
+            "type": "string"
+        },
+        "UserId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "TimeStamp": {
+            "type": "string"
+        },
+        "Version": {
+            "type": "string"
+        }
+    }
+}

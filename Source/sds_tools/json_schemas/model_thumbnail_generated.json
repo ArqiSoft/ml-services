@@ -1,0 +1,31 @@
+{
+    "title": "Model thumbnail generated parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "ModelThumbnailGenerated",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Events",
+    "properties": {
+        "Id": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "BlobId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "Bucket": {
+            "type": "string",
+            "default": null
+        },
+        "TimeStamp": {
+            "type": "string"
+        }
+    }
+}

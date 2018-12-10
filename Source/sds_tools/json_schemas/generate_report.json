@@ -1,0 +1,31 @@
+{
+    "title": "Generate modelling report event consumer parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "GenerateReport",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Commands",
+    "properties": {
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "ParentId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "TimeStamp": {
+            "type": "string",
+            "default": null
+        },
+        "Models": {
+            "type": "array"
+        },
+        "UserId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        }
+    }
+}

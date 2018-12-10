@@ -1,0 +1,16 @@
+FROM nvidia/cuda
+
+ENV INSTALL_PATH /usr/app
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN mkdir -p "$INSTALL_PATH" && chmod 777 "$INSTALL_PATH"
+WORKDIR $INSTALL_PATH
+COPY . .
+
+RUN apt-get update && apt-get install -y curl
+RUN curl -O http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+RUN dpkg -I cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+RUN apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
+RUN apt-get update
+RUN apt-get install -y cuda
+RUN dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb

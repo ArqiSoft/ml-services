@@ -1,0 +1,34 @@
+# Base image
+FROM "docker.your-company.com/sds-tools:latest"
+
+LABEL maintainer="rick.zakharov@gmail.com"
+
+ENV INSTALL_PATH /usr/app
+ENV OSDR_TEMP_FILES_FOLDER /temp
+ENV OSDR_LOG_FOLDER /logs
+RUN mkdir -p "$INSTALL_PATH" && chmod 777 "$INSTALL_PATH"
+RUN mkdir -p "$OSDR_TEMP_FILES_FOLDER" && chmod 777 "$OSDR_TEMP_FILES_FOLDER"
+RUN mkdir -p "$OSDR_LOG_FOLDER" && chmod 777 "$OSDR_LOG_FOLDER"
+WORKDIR $INSTALL_PATH
+
+COPY tests/resources resources
+COPY tests/applicability_domain_test.py applicability_domain_test.py
+COPY tests/manual_test_set_test.py manual_test_set_test.py
+COPY tests/classic_metrics_test.py classic_metrics_test.py
+COPY tests/test_set_size_test.py test_set_size_test.py
+
+#RUN python applicability_domain_test.py
+#RUN python manual_test_set_test.py
+#RUN python classic_metrics_test.py
+#RUN python test_set_size_test.py
+
+FROM "docker.your-company.com/sds-tools:latest"
+
+ENV INSTALL_PATH /usr/app
+RUN mkdir -p "$INSTALL_PATH" && chmod 777 "$INSTALL_PATH"
+WORKDIR $INSTALL_PATH
+
+# Add the app code
+COPY model_trainer.py model_trainer.py
+
+EXPOSE 5000

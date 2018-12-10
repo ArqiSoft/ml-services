@@ -1,0 +1,26 @@
+# Base image
+FROM continuumio/miniconda3:4.5.4
+
+LABEL maintainer="rick.zakharov@gmail.com"
+
+ENV INSTALL_PATH /usr/app
+RUN mkdir -p "$INSTALL_PATH" && chmod 777 "$INSTALL_PATH"
+WORKDIR $INSTALL_PATH
+
+# Add the app code
+COPY . .
+
+# Update repository data and install needed libraries for python packages
+RUN apt-get update
+RUN apt-get install libxrender1
+RUN apt-get -y install gcc g++
+
+#Install Python requirements
+RUN pip install --ignore-installed -r requirements.txt
+
+#Install conda requirements
+RUN conda config --append channels rdkit
+RUN conda config --append channels conda-forge
+RUN conda install --yes --file conda_requirements_cpu.txt
+
+EXPOSE 5030

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Report</title>
+    <style type="text/css">
+   @page {
+    size: 21cm 29.7cm;
+    margin: 3mm 4mm 3mm 4mm; /* change the margins as you want them to be. */
+}
+  </style>
+</head>
+<body>
+<header></header>
+<div style="text-align: center;">
+    <h1>Machine Learning Performance Report</h1>
+    <p>{{ dataset }}</p>
+</div>
+
+<div>
+    <div style="text-align: center;">
+        <p>{{ metrics }}</p>
+        <br/>
+        <p>{{ optimizer }}</p>
+
+        {% for plot in radar_plots -%}
+            <img src="{{ plot }}" width="700px"><br>
+        {% endfor -%}
+
+        {% for plot in confusion_matrixes -%}
+            <img src="{{ plot }}" width="700px"><br>
+        {% endfor -%}
+
+        {% for plot in roc_plots -%}
+            <img src="{{ plot }}" width="700px"><br>
+        {% endfor -%}
+
+        {% for plot in distribution_plots -%}
+            <img src="{{ plot }}" width="700px"><br>
+        {% endfor -%}
+
+        {% for plot in bin_plots -%}
+            <img src="{{ plot }}" width="700px"><br>
+        {% endfor -%}
+
+        {% for plot in regression_result_test -%}
+            <img src="{{ plot }}" width="700px"><br>
+        {% endfor -%}
+
+        {% for plot in regression_result_train -%}
+            <img src="{{ plot }}" width="700px"><br>
+        {% endfor -%}
+
+        {% for info in dataset_info -%}
+            <pre>{{ info }}</pre>
+        {% endfor -%}
+    </div>
+</div>
+<footer></footer>
+</body>
+</html>

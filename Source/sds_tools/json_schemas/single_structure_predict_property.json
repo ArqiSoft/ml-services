@@ -1,0 +1,29 @@
+{
+    "title": "Single structure predictor command parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "PredictStructure",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Commands",
+    "properties": {
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "Id": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "Structure": {
+            "type": "string"
+        },
+        "Format": {
+            "type": "string"
+        },
+        "PropertyName": {
+            "type": "string"
+        },
+        "Models": {
+            "type": "array"
+        }
+    }
+}

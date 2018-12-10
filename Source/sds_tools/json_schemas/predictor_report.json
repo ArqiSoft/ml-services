@@ -1,0 +1,36 @@
+{
+    "title": "Predictor report parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "PropertiesPredictionReportCreated",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Events",
+    "properties": {
+        "Id": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "Message": {
+              "type": "string"
+        },
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "ReportBlobId": {
+              "type": "string"
+        },
+        "ReportBucket": {
+              "type": "string"
+        },
+        "UserId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "TimeStamp": {
+            "type": "string"
+        },
+        "Version": {
+            "type": "string"
+        }
+    }
+}

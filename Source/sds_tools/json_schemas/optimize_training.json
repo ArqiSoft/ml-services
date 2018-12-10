@@ -1,0 +1,62 @@
+{
+    "title": "Model optimizer event consumer parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "OptimizeTraining",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Commands",
+    "properties": {
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "Id": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "UserId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "SourceFileName": {
+            "type": "string",
+            "default": null
+        },
+        "TargetFolderId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "TimeStamp": {
+            "type": "string"
+        },
+        "SourceBlobId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "SourceBucket": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "Methods": {
+            "type": "array",
+            "default": null
+        },
+        "ClassName": {
+            "type": "string",
+            "default": null
+        },
+        "DnnLayers": {
+            "type": "integer",
+            "default": null
+        },
+        "DnnNeurons": {
+            "type": "integer",
+            "default": null
+        }
+    }
+}

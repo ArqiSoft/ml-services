@@ -1,0 +1,39 @@
+# This docker-compose if for running OSDR ML services on DEV
+
+version: '3'
+
+services:
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: osdr-test-rabbitmq
+        hostname: "rabbitmq-test"
+        environment:
+        - RABBITMQ_DEFAULT_VHOST=osdr_dev
+        ports:
+        - "5673:5672"
+        networks:
+        - osdr-net-ml-test-ext
+        volumes:
+        - data-rabbitmq:/var/lib/rabbitmq
+
+    mongo:
+        image: mongo:3.4
+        container_name: osdr-test-mongo
+        ports:
+        - "27018:27017"
+        networks:
+        - osdr-net-ml-test-ext
+        volumes:
+        - data-mongo-config:/data/configdb
+        - data-mongo-data:/data/db
+
+volumes:
+    data-rabbitmq:
+    data-mongo-config:
+    data-mongo-data:
+    data-redis:
+
+networks:
+    osdr-net-ml-test-ext:
+        external:
+            name: osdr-sys-ml-test-net

@@ -1,0 +1,17 @@
+{
+    "title": "Feature vectors calculation failed parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "FeatureVectorsCalculationFailed",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Events",
+    "properties": {
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "Message": {
+            "type": "string",
+            "default": null
+        }
+    }
+}

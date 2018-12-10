@@ -1,0 +1,212 @@
+# This docker-compose if for running OSDR ML services on DEV
+
+version: '3'
+
+services:
+    blob-storage-api-test:
+        container_name: blob-storage-api-test
+        image: docker.your-company.com/blob-storage-api:latest
+        environment:
+        - OSDR_LOG_FOLDER=/logs
+        - OSDR_MONGO_DB=mongodb://mongo:27017/osdr
+        - OSDR_RABBIT_MQ=rabbitmq://guest:guest@rabbitmq:5672/osdr_dev
+        volumes:
+        - /home/ml_tests/logs:/logs/
+        networks:
+        - osdr-net-ml-test-ext
+        ports:
+        - "18005:18006"
+
+    osdr-ml-modeler-test:
+        container_name: osdr-ml-modeler-test
+        image: docker.your-company.com/osdr-ml-modeler-test:latest
+        environment:
+        - OSDR_LOG_FOLDER=/logs
+        - OSDR_TEMP_FILES_FOLDER=/temps
+        - OSDR_RABBIT_MQ=rabbitmq://guest:guest@rabbitmq:5672/osdr_dev
+        - OSDR_BLOB_SERVICE_TOKEN_URL=https://id.your-company.com/auth/realms/OSDR/protocol/openid-connect/token
+        - OSDR_BLOB_SERVICE_URL=http://blob-storage-api-test:18006/api
+        - OSDR_ML_MODELER_CLIENT_SECRET=52461d3c-7f0b-4b72-a508-1e7febaacabb
+        - OSDR_ML_MODELER_CLIENT_ID=osdr_ml_modeler
+        - OSDR_API_URL=https://api.dev.dataledger.io/osdr/v1/api
+        volumes:
+        - /home/ml_tests/logs:/logs/
+        - /home/ml_tests/temp:/temps/
+        depends_on:
+        - blob-storage-api-test
+        networks:
+        - osdr-net-ml-test-ext
+        command: >
+          /bin/bash -c "
+            sleep 5;
+            python ./model_trainer.py;
+          "
+
+    osdr-ml-predictor-test:
+        container_name: osdr-ml-predictor-test
+        image: docker.your-company.com/osdr-ml-predictor-test:latest
+        environment:
+        - OSDR_LOG_FOLDER=/logs
+        - OSDR_TEMP_FILES_FOLDER=/temps
+        - OSDR_RABBIT_MQ=rabbitmq://guest:guest@rabbitmq:5672/osdr_dev
+        - OSDR_BLOB_SERVICE_TOKEN_URL=https://id.your-company.com/auth/realms/OSDR/protocol/openid-connect/token
+        - OSDR_BLOB_SERVICE_URL=http://blob-storage-api-test:18006/api
+        - OSDR_ML_MODELER_CLIENT_SECRET=52461d3c-7f0b-4b72-a508-1e7febaacabb
+        - OSDR_ML_MODELER_CLIENT_ID=osdr_ml_modeler
+        - OSDR_RABBIT_MQ_ML_PREFETCH_COUNT=12
+        volumes:
+        - /home/ml_tests/logs:/logs/
+        - /home/ml_tests/temp:/temps/
+        depends_on:
+        - blob-storage-api-test
+        networks:
+        - osdr-net-ml-test-ext
+        command: >
+          /bin/bash -c "
+            sleep 5;
+            python ./properties_predictor.py;
+          "
+
+    osdr-ml-training-reporter-test:
+        container_name: osdr-ml-training-reporter-test
+        image: docker.your-company.com/osdr-ml-training-reporter-test:latest
+        environment:
+        - OSDR_LOG_FOLDER=/logs
+        - OSDR_TEMP_FILES_FOLDER=/temps
+        - OSDR_RABBIT_MQ=rabbitmq://guest:guest@rabbitmq:5672/osdr_dev
+        - OSDR_BLOB_SERVICE_TOKEN_URL=https://id.your-company.com/auth/realms/OSDR/protocol/openid-connect/token
+        - OSDR_BLOB_SERVICE_URL=http://blob-storage-api-test:18006/api
+        - OSDR_ML_MODELER_CLIENT_SECRET=52461d3c-7f0b-4b72-a508-1e7febaacabb
+        - OSDR_ML_MODELER_CLIENT_ID=osdr_ml_modeler
+        - OSDR_RABBIT_MQ_ML_TRAINING_REPORTER_PREFETCH_COUNT=12
+        - OSDR_API_URL=https://api.dev.dataledger.io/osdr/v1/api
+        volumes:
+        - /home/ml_tests/logs:/logs/
+        - /home/ml_tests/temp:/temps/
+        depends_on:
+        - blob-storage-api-test
+        networks:
+        - osdr-net-ml-test-ext
+        command: >
+          /bin/bash -c "
+            sleep 5;
+            python ./report_generator.py;
+          "
+
+    osdr-blob-loaded-test:
+        container_name: osdr-blob-loaded-test
+        image: docker.your-company.com/osdr-ml-test:latest
+        environment:
+        - OSDR_BLOB_SERVICE_URL=http://blob-storage-api-test:18006/api
+        - OSDR_LOG_FOLDER=/logs
+        - OSDR_TEMP_FILES_FOLDER=/temps
+        - OSDR_ML_MODELER_CLIENT_SECRET=52461d3c-7f0b-4b72-a508-1e7febaacabb
+        - OSDR_ML_MODELER_CLIENT_ID=osdr_ml_modeler
+        - OSDR_BLOB_SERVICE_TOKEN_URL=https://id.your-company.com/auth/realms/OSDR/protocol/openid-connect/token
+        volumes:
+        - /home/ml_tests/logs:/logs/
+        - /home/ml_tests/temp:/temps/
+        networks:
+        - osdr-net-ml-test-ext
+        command: >
+          /bin/bash -c "
+            sleep 10;
+            python ./start_blob_loaded_consumer.py;
+          "
+
+    osdr-ml-training-optimizer-test:
+        container_name: osdr-ml-training-optimizer-test
+        image: docker.your-company.com/osdr-ml-training-optimizer-test:latest
+        environment:
+        - OSDR_LOG_FOLDER=/logs
+        - OSDR_TEMP_FILES_FOLDER=/temps
+        - OSDR_RABBIT_MQ=rabbitmq://guest:guest@rabbitmq:5672/osdr_dev
+        - OSDR_BLOB_SERVICE_TOKEN_URL=https://id.your-company.com/auth/realms/OSDR/protocol/openid-connect/token
+        - OSDR_BLOB_SERVICE_URL=http://blob-storage-api-test:18006/api
+        - OSDR_ML_MODELER_CLIENT_SECRET=52461d3c-7f0b-4b72-a508-1e7febaacabb
+        - OSDR_ML_MODELER_CLIENT_ID=osdr_ml_modeler
+        - OSDR_RABBIT_MQ_ML_TRAINING_OPTIMIZER_PREFETCH_COUNT=12
+        volumes:
+        - /home/ml_tests/logs:/logs/
+        - /home/ml_tests/temp:/temps/
+        depends_on:
+        - blob-storage-api-test
+        networks:
+        - osdr-net-ml-test-ext
+        command: >
+          /bin/bash -c "
+            sleep 5;
+            python ./optimizer.py;
+          "
+
+    osdr-ml-single-structure-predictor-test:
+        container_name: osdr-ml-single-structure-predictor-test
+        image: docker.your-company.com/osdr-ml-single-structure-predictor-test:latest
+        environment:
+        - OSDR_LOG_FOLDER=/logs
+        - OSDR_TEMP_FILES_FOLDER=/temps
+        - OSDR_RABBIT_MQ=rabbitmq://guest:guest@rabbitmq:5672/osdr_dev
+        - OSDR_BLOB_SERVICE_TOKEN_URL=https://id.your-company.com/auth/realms/OSDR/protocol/openid-connect/token
+        - OSDR_BLOB_SERVICE_URL=http://blob-storage-api-test:18006/api
+        - OSDR_ML_MODELER_CLIENT_SECRET=52461d3c-7f0b-4b72-a508-1e7febaacabb
+        - OSDR_ML_MODELER_CLIENT_ID=osdr_ml_modeler
+        - OSDR_RABBIT_MQ_ML_SINGLE_STRUCTURE_PREDICTOR_PREFETCH_COUNT=32
+        - API_MODELS_ENTITIES_URL=https://api.dev.dataledger.io/osdr/v1/api/entities/models/public
+        volumes:
+        - /home/ml_tests/logs:/logs/
+        - /home/ml_tests/temp:/temps/
+        depends_on:
+        - blob-storage-api-test
+        networks:
+        - osdr-net-ml-test-ext
+        command: >
+          /bin/bash -c "
+            sleep 5;
+            python ./single_structure_predictor.py;
+          "
+
+    osdr-feature-vectors-calculator-test:
+        container_name: osdr-feature-vectors-calculator-test
+        image: docker.your-company.com/osdr-feature-vectors-calculator-test:latest
+        environment:
+        - OSDR_LOG_FOLDER=/logs
+        - OSDR_TEMP_FILES_FOLDER=/temps
+        - OSDR_RABBIT_MQ=rabbitmq://guest:guest@rabbitmq:5672/osdr_dev
+        - OSDR_RABBIT_MQ_FEATURE_VECTOR_CALCULATOR_PREFETCH_COUNT=32
+        - REDIS_EXPIRATION_TIME_SECONDS=43200
+        volumes:
+        - /home/ml_tests/logs:/logs/
+        - /home/ml_tests/temp:/temps/
+        networks:
+        - osdr-net-ml-test-ext
+        command: >
+          /bin/bash -c "
+            sleep 5;
+            python ./calculator.py;
+          "
+
+    osdr-ml-test:
+        container_name: osdr-ml-test
+        image: docker.your-company.com/osdr-ml-test:latest
+        environment:
+        - OSDR_BLOB_SERVICE_URL=http://blob-storage-api-test:18006/api
+        - OSDR_LOG_FOLDER=/logs
+        - OSDR_TEMP_FILES_FOLDER=/temps
+        - OSDR_ML_MODELER_CLIENT_SECRET=52461d3c-7f0b-4b72-a508-1e7febaacabb
+        - OSDR_ML_MODELER_CLIENT_ID=osdr_ml_modeler
+        - OSDR_BLOB_SERVICE_TOKEN_URL=https://id.your-company.com/auth/realms/OSDR/protocol/openid-connect/token
+        volumes:
+        - /home/ml_tests/logs:/logs/
+        - /home/ml_tests/temp:/temps/
+        networks:
+        - osdr-net-ml-test-ext
+        command: >
+          /bin/bash -c "
+            sleep 15;
+            python ./start_integration_tests.py;
+          "
+
+networks:
+    osdr-net-ml-test-ext:
+        external:
+            name: osdr-sys-ml-test-net

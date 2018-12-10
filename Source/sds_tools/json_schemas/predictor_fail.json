@@ -1,0 +1,32 @@
+{
+    "title": "Predictor fail parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "PropertiesPredictionFailed",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Events",
+    "properties": {
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "Id": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "Message": {
+            "type": "string",
+            "default": null
+        },
+        "UserId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "TimeStamp": {
+            "type": "string",
+            "default": null
+        }
+    }
+}

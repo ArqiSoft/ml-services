@@ -1,0 +1,40 @@
+{
+    "title": "Blob loaded command parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "BlobLoaded",
+    "namespace": "Sds.Storage.Blob.Events",
+    "properties": {
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "DatasetBlobId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "DatasetBucket": {
+            "type": "string"
+        },
+        "ModelBlobId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "ModelBucket": {
+            "type": "string"
+        },
+        "UserId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "ParentId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "Id": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        }
+    }
+}

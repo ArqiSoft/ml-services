@@ -1,0 +1,40 @@
+{
+    "title": "Modeler report parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "TrainingReportCreated",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Events",
+    "properties": {
+        "Message": {
+              "type": "string"
+        },
+        "ReportBlobId": {
+              "type": "string"
+        },
+        "ReportBucket": {
+              "type": "string"
+        },
+        "Id": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "ParentId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "UserId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "TimeStamp": {
+            "type": "string"
+        },
+        "Version": {
+            "type": "string"
+        }
+    }
+}

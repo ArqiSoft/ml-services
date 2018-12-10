@@ -1,0 +1,29 @@
+# Base image
+FROM "docker.your-company.com/sds-tools:latest"
+
+LABEL maintainer="rick.zakharov@gmail.com"
+
+ENV INSTALL_PATH /usr/app
+ENV OSDR_TEMP_FILES_FOLDER /temp
+ENV OSDR_LOG_FOLDER /logs
+RUN mkdir -p "$INSTALL_PATH" && chmod 777 "$INSTALL_PATH"
+WORKDIR $INSTALL_PATH
+
+COPY tests/resources/ resources/
+COPY tests/predictor_test.py predictor_test.py
+#WORKDIR $INSTALL_PATH/resources/naive_bayes_model
+#RUN ls -lSh
+#
+#WORKDIR $INSTALL_PATH
+#RUN python predictor_test.py
+
+FROM "docker.your-company.com/sds-tools:latest"
+
+ENV INSTALL_PATH /usr/app
+RUN mkdir -p "$INSTALL_PATH" && chmod 777 "$INSTALL_PATH"
+WORKDIR $INSTALL_PATH
+
+# Add the app code
+COPY properties_predictor.py properties_predictor.py
+
+EXPOSE 5010

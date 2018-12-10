@@ -1,0 +1,72 @@
+{
+    "title": "Modeler event consumer parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "TrainModel",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Commands",
+    "properties": {
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "SourceBlobId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "SourceBucket": {
+            "type": "string",
+            "default": null
+        },
+        "ParentId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "Method": {
+            "type": "string",
+            "default": null
+        },
+        "Scaler": {
+            "type": "string",
+            "default": null
+        },
+        "ClassName": {
+            "type": "string",
+            "default": null
+        },
+        "SubSampleSize": {
+            "type": "decimal",
+            "default": null
+        },
+        "TestDatasetSize": {
+            "type": "decimal",
+            "default": null
+        },
+        "KFold": {
+            "type": "integer",
+            "default": null
+        },
+        "Fingerprints": {
+            "type": "array",
+            "default": null
+        },
+        "UserId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "HyperParameters": {
+            "type": "object"
+        },
+        "DnnLayers": {
+            "type": "integer",
+            "default": null
+        },
+        "DnnNeurons": {
+            "type": "integer",
+            "default": null
+        }
+    }
+}

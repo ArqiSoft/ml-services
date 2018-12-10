@@ -1,0 +1,23 @@
+{
+    "title": "CSV generated parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "CsvGenerated",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Events",
+    "properties": {
+        "Id": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid",
+            "default": null
+        },
+        "TimeStamp": {
+            "type": "string",
+            "default": null
+        }
+    }
+}

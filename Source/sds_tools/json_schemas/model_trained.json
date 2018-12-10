@@ -1,0 +1,70 @@
+{
+    "title": "Modeler training result parameters types",
+    "type": "object",
+    "hostname": "amqp://guest:guest@rabbitmq:5672/osdr_dev",
+    "event": "ModelTrained",
+    "namespace": "Sds.Osdr.MachineLearning.Domain.Events",
+    "properties": {
+        "Id": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "CorrelationId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "UserId": {
+            "type": "string",
+            "format": "Guid"
+        },
+        "BlobId":{
+            "type": "string",
+            "format": "Guid"
+        },
+        "Bucket": {
+            "type": "string"
+        },
+        "NumberOfGenericFiles": {
+            "type": "integer"
+        },
+        "TimeStamp": {
+            "type": "string"
+        },
+        "Property": {
+            "type": "object"
+        },
+        "Dataset": {
+            "type": "object"
+        },
+        "PropertyCategory": {
+            "type": "string"
+        },
+        "PropertyName": {
+            "type": "string"
+        },
+        "PropertyUnits": {
+            "type": "string"
+        },
+        "PropertyDescription": {
+            "type": "string"
+        },
+        "DatasetTitle": {
+            "type": "string"
+        },
+        "DatasetDescription": {
+            "type": "string"
+        },
+        "Modi" : {
+            "type": "decimal"
+        },
+        "AvailableSingleStructurePrediction" : {
+            "type": "boolean"
+        },
+        "MethodDisplayName": {
+            "type": "string"
+        },
+        "Metadata": {
+            "type": "string"
+        }
+    }
+}
