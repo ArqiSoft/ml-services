@@ -1,5 +1,5 @@
 # Base image
-FROM "docker.your-company.com/sds-tools:latest"
+FROM "leanda/ml-tools:latest"
 
 LABEL maintainer="rick.zakharov@gmail.com"
 
