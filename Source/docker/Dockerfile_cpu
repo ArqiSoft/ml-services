@@ -15,13 +15,16 @@ RUN apt-get update
 RUN apt-get install libxrender1
 RUN apt-get -y install gcc g++
 
-#Install Python requirements''
+#Install Python requirements
 RUN pip install --upgrade pip
 RUN pip install --ignore-installed -r requirements.txt
 
 #Install conda requirements
+RUN conda update conda
 RUN conda config --append channels rdkit
 RUN conda config --append channels conda-forge
-RUN conda install --yes --file conda_requirements_cpu.txt
+RUN conda install --yes -n base --file conda_requirements_cpu.txt
+RUN conda install pandas=0.22.0 # temporary fix for FVC
+RUN pip install pandas==0.22.0 # temporary fix for FVC
 
 EXPOSE 5030

@@ -2,7 +2,7 @@
 # "docker.your-company.com/osdr-sds-tools:latest"
 
 # Base image
-FROM "leanda/ml-base:latest"
+FROM leanda/ml-base:latest
 
 LABEL maintainer="rick.zakharov@gmail.com"
 
