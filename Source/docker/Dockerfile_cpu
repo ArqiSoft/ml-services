@@ -15,7 +15,8 @@ RUN apt-get update
 RUN apt-get install libxrender1
 RUN apt-get -y install gcc g++
 
-#Install Python requirements
+#Install Python requirements''
+RUN pip install --upgrade pip
 RUN pip install --ignore-installed -r requirements.txt
 
 #Install conda requirements
