@@ -1,5 +1,5 @@
 # Base image
-FROM leanda/ml-tools:latest
+FROM "leanda/ml-tools:latest"
 
 LABEL maintainer="rick.zakharov@gmail.com"
 
